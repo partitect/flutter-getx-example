@@ -2,6 +2,9 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:getx_started/core/models/covid_model.dart';
 import 'package:getx_started/core/models/posts_model.dart';
 import 'package:getx_started/core/services/api_services.dart';
+import 'package:getx_started/utils/moment_utils.dart';
+import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 
 enum GetPostEnum { Loaded, Loading, Error, Initial }
 enum GetCovidEnum { Loaded, Loading, Error, Initial }
@@ -20,10 +23,20 @@ class ApiController extends GetxController {
     update();
     _apiServices.getCovidStats().then((value) {
       if (value != false) {
-        for (var stat in value) {
-          covidList.add(CovidStats.fromJson(stat[0]));
-        }
-        print(covidList[0].date);
+        var date1 = DateFormat.yMd().parse('03/01/2021');
+        var date2 = DateFormat.yMd().parse('04/25/2021');
+
+        getDaysInBeteween(date1, date2).then((dateVal) {
+          for (var dts in dateVal) {
+            var data = value[Jiffy(dts).format("dd/MM/yyyy")];
+            List<dynamic> list = [];
+            list.add(data);
+            for (var stat in list) {
+              covidList.add(CovidStats.fromJson(stat));
+            }
+          }
+        });
+
         getCovidEnum = GetCovidEnum.Loaded;
         update();
       } else {

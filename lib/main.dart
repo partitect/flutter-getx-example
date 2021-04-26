@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_started/controllers/api_controller.dart';
-import 'package:getx_started/views/pages/home/view/home_view.dart';
+import 'controllers/page_controller.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,6 +17,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: HomeViewPage());
+        home: PageControllerView(
+          currentIndex: 0,
+        ));
   }
 }

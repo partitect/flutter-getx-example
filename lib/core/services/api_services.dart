@@ -18,7 +18,9 @@ class ApiServices {
     var url = Uri.parse(CovidURL);
     var response = await http.get(url);
     if (response.statusCode == 200) {
-      return json.decode(response.body);
+      Map<String, dynamic> map =
+          Map<String, dynamic>.from(json.decode(response.body));
+      return map;
     } else {
       print("Covid Verileri Çekilirken Hata Oluştu");
       return false;
