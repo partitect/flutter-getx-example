@@ -18,7 +18,7 @@ class _HomeViewPageState extends State<HomeViewPage> {
   @override
   void initState() {
     apiController.getAllCovidStats();
-
+    apiController.getTotalCase();
     super.initState();
   }
 
