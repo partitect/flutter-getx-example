@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:getx_started/widgets/styledText_widget.dart';
-import 'package:intl/intl.dart';
 import 'utils/utils.dart';
 import 'controllers/page_controller.dart';
 

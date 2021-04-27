@@ -8,22 +8,26 @@ import 'package:jiffy/jiffy.dart';
 
 enum GetPostEnum { Loaded, Loading, Error, Initial }
 enum GetCovidEnum { Loaded, Loading, Error, Initial }
+enum GetTotalEnum { Loaded, Loading, Error, Initial }
 
 class ApiController extends GetxController {
   ApiServices _apiServices = ApiServices();
   GetPostEnum getPostEnum = GetPostEnum.Initial;
   GetCovidEnum getCovidEnum = GetCovidEnum.Initial;
+  GetTotalEnum getTotalEnum = GetTotalEnum.Initial;
 
   List<CovidStats> covidList = [];
   List<PostsModel> myList = [];
-  var totalCase;
+  var totalPatients;
+  var totalDeaths;
+  var totalTests;
   Future getAllCovidStats() {
     getCovidEnum = GetCovidEnum.Loading;
     covidList.clear();
     update();
     _apiServices.getCovidStats().then((value) {
       if (value != false) {
-        var date1 = DateFormat.yMd().parse('03/01/2021');
+        var date1 = DateFormat.yMd().parse('03/11/2020');
         var date2 = DateFormat.yMd().parse('04/25/2021');
         //üstte iki tarih arası verileri getirmesi için tarihleri verdim, altta da iki tarihin arasındaki tüm tarihleri getiren getDaysinBetween fonksiyonu ile o tarihler arasında apiyi döndürdüm
         getDaysInBeteween(date1, date2).then((dateVal) {
@@ -49,13 +53,13 @@ class ApiController extends GetxController {
     });
   }
 
-  Future getTotalCase() {
-    getCovidEnum = GetCovidEnum.Loading;
+  Future getTotalPatients() {
+    getTotalEnum = GetTotalEnum.Loading;
     covidList.clear();
     update();
     _apiServices.getCovidStats().then((value) {
       if (value != false) {
-        var date1 = DateFormat.yMd().parse('03/11/2020');
+        var date1 = DateFormat.yMd().parse('04/26/2021');
         var date2 = DateFormat.yMd().parse('04/26/2021');
 
         getDaysInBeteween(date1, date2).then((dateVal) {
@@ -65,16 +69,75 @@ class ApiController extends GetxController {
             list.add(data);
             for (var stat in list) {
               if (CovidStats.fromJson(stat).cases != null) {
-                totalCase += CovidStats.fromJson(stat).cases;
+                totalPatients = CovidStats.fromJson(stat).totalPatients;
               }
             }
           }
         });
-        getCovidEnum = GetCovidEnum.Loaded;
+        getTotalEnum = GetTotalEnum.Loaded;
         update();
-        return totalCase;
       } else {
-        getCovidEnum = GetCovidEnum.Error;
+        getTotalEnum = GetTotalEnum.Error;
+        update();
+      }
+    });
+  }
+
+  Future getTotalDeaths() {
+    getTotalEnum = GetTotalEnum.Loading;
+    covidList.clear();
+    update();
+    _apiServices.getCovidStats().then((value) {
+      if (value != false) {
+        var date1 = DateFormat.yMd().parse('04/26/2021');
+        var date2 = DateFormat.yMd().parse('04/26/2021');
+
+        getDaysInBeteween(date1, date2).then((dateVal) {
+          for (var dts in dateVal) {
+            var data = value[Jiffy(dts).format("dd/MM/yyyy")];
+            List<dynamic> list = [];
+            list.add(data);
+            for (var stat in list) {
+              if (CovidStats.fromJson(stat).cases != null) {
+                totalDeaths = CovidStats.fromJson(stat).totalDeaths;
+              }
+            }
+          }
+        });
+        getTotalEnum = GetTotalEnum.Loaded;
+        update();
+      } else {
+        getTotalEnum = GetTotalEnum.Error;
+        update();
+      }
+    });
+  }
+
+  Future getTotalTests() {
+    getTotalEnum = GetTotalEnum.Loading;
+    covidList.clear();
+    update();
+    _apiServices.getCovidStats().then((value) {
+      if (value != false) {
+        var date1 = DateFormat.yMd().parse('04/26/2021');
+        var date2 = DateFormat.yMd().parse('04/26/2021');
+
+        getDaysInBeteween(date1, date2).then((dateVal) {
+          for (var dts in dateVal) {
+            var data = value[Jiffy(dts).format("dd/MM/yyyy")];
+            List<dynamic> list = [];
+            list.add(data);
+            for (var stat in list) {
+              if (CovidStats.fromJson(stat).cases != null) {
+                totalTests = CovidStats.fromJson(stat).totalTests;
+              }
+            }
+          }
+        });
+        getTotalEnum = GetTotalEnum.Loaded;
+        update();
+      } else {
+        getTotalEnum = GetTotalEnum.Error;
         update();
       }
     });

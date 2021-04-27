@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:getx_started/utils/hexColor.dart';
+import 'package:getx_started/views/pages/daily/view/daily_view.dart';
 import 'package:getx_started/views/pages/home/view/home_view.dart';
 
 class PageControllerView extends StatefulWidget {
@@ -22,17 +23,30 @@ class _PageControllerViewState extends State<PageControllerView> {
     ];
     List<Widget> pages = [
       HomeViewPage(),
-      HomeViewPage(),
+      DailyViewScreen(),
       HomeViewPage(),
       HomeViewPage(),
       HomeViewPage(),
     ];
     return Scaffold(
+      appBar: AppBar(
+        title: Text("CoronApp+"),
+        centerTitle: false,
+        brightness: Brightness.dark,
+        backgroundColor: Colors.purple,
+      ),
       body: Container(
         child: pages[widget.currentIndex],
       ),
       bottomNavigationBar: Container(
-        color: HexColor("#402B4E"),
+        decoration: BoxDecoration(
+          color: Colors.redAccent,
+          gradient: LinearGradient(
+            end: Alignment.bottomLeft,
+            begin: Alignment.bottomRight,
+            colors: [Colors.purple, Colors.pink],
+          ),
+        ),
         height: 80,
         padding: EdgeInsets.only(bottom: 15),
         child: Row(
