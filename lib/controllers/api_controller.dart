@@ -21,6 +21,8 @@ class ApiController extends GetxController {
   var totalPatients;
   var totalDeaths;
   var totalTests;
+  var totalRecovered;
+  var totalActiveCase;
   Future getAllCovidStats() {
     getCovidEnum = GetCovidEnum.Loading;
     covidList.clear();
@@ -34,11 +36,14 @@ class ApiController extends GetxController {
           for (var dts in dateVal) {
             var data = value[Jiffy(dts).format("dd/MM/yyyy")];
             //allta apinin başlarında tarih olması sebebiyle dynamic list oluşturdum, senin hata aldığın yer burası
+
             List<dynamic> list = [];
             list.add(data);
             //add ile tarihli object leri listeme ekledim
+
             for (var stat in list) {
               //listemin içinde bir daha döndüm ve modelime ekledim
+              //
               covidList.add(CovidStats.fromJson(stat));
             }
           }
@@ -130,6 +135,68 @@ class ApiController extends GetxController {
             for (var stat in list) {
               if (CovidStats.fromJson(stat).cases != null) {
                 totalTests = CovidStats.fromJson(stat).totalTests;
+              }
+            }
+          }
+        });
+        getTotalEnum = GetTotalEnum.Loaded;
+        update();
+      } else {
+        getTotalEnum = GetTotalEnum.Error;
+        update();
+      }
+    });
+  }
+
+  Future getTotalRecovered() {
+    getTotalEnum = GetTotalEnum.Loading;
+    covidList.clear();
+    update();
+    _apiServices.getCovidStats().then((value) {
+      if (value != false) {
+        var date1 = DateFormat.yMd().parse('04/26/2021');
+        var date2 = DateFormat.yMd().parse('04/26/2021');
+
+        getDaysInBeteween(date1, date2).then((dateVal) {
+          for (var dts in dateVal) {
+            var data = value[Jiffy(dts).format("dd/MM/yyyy")];
+            List<dynamic> list = [];
+            list.add(data);
+            for (var stat in list) {
+              if (CovidStats.fromJson(stat).cases != null) {
+                totalRecovered = CovidStats.fromJson(stat).totalRecovered;
+              }
+            }
+          }
+        });
+        getTotalEnum = GetTotalEnum.Loaded;
+        update();
+      } else {
+        getTotalEnum = GetTotalEnum.Error;
+        update();
+      }
+    });
+  }
+
+  Future getActiveCase() {
+    getTotalEnum = GetTotalEnum.Loading;
+    covidList.clear();
+    update();
+    _apiServices.getCovidStats().then((value) {
+      if (value != false) {
+        var date1 = DateFormat.yMd().parse('04/26/2021');
+        var date2 = DateFormat.yMd().parse('04/26/2021');
+
+        getDaysInBeteween(date1, date2).then((dateVal) {
+          for (var dts in dateVal) {
+            var data = value[Jiffy(dts).format("dd/MM/yyyy")];
+            List<dynamic> list = [];
+            list.add(data);
+            for (var stat in list) {
+              if (CovidStats.fromJson(stat).cases != null) {
+                totalActiveCase =
+                    int.parse(CovidStats.fromJson(stat).totalPatients) -
+                        int.parse(CovidStats.fromJson(stat).totalRecovered);
               }
             }
           }

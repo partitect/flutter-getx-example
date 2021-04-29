@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:getx_started/views/pages/daily/widget/daily_list_widget.dart';
+import 'package:getx_started/views/pages/home/widget/active_case_widget.dart';
 import 'package:getx_started/views/pages/home/widget/total_deaths_widget.dart';
 import 'package:getx_started/views/pages/home/widget/total_patients_widget.dart';
+import 'package:getx_started/views/pages/home/widget/total_recovered_widget.dart';
 import 'package:getx_started/views/pages/home/widget/total_tests_widget.dart';
 
 class HomeViewPage extends StatefulWidget {
@@ -25,6 +27,9 @@ class _HomeViewPageState extends State<HomeViewPage> {
               SizedBox(height: 10),
               TotalDeathWidget(),
               SizedBox(height: 10),
+              TotalRecoveredWidget(),
+              SizedBox(height: 10),
+              ActiveCaseWidget(),
             ],
           ),
         ),

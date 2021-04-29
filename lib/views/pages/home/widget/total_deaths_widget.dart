@@ -25,6 +25,7 @@ class _TotalDeathWidgetState extends State<TotalDeathWidget> {
           dataval: value,
           dataType: value.totalDeaths,
           loading: GetTotalEnum.Loading,
+          icon: "death",
         );
       },
     );

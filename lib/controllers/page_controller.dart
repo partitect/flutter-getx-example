@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:getx_started/utils/hexColor.dart';
 import 'package:getx_started/views/pages/daily/view/daily_view.dart';
 import 'package:getx_started/views/pages/home/view/home_view.dart';
+import 'package:getx_started/widgets/styledText_widget.dart';
 
 class PageControllerView extends StatefulWidget {
   var currentIndex;
@@ -15,25 +16,46 @@ class _PageControllerViewState extends State<PageControllerView> {
   @override
   Widget build(BuildContext context) {
     var bottomBarList = [
-      {"cIndex": 0, "title": "Home", "icon": "home"},
-      {"cIndex": 1, "title": "Search", "icon": "message"},
-      {"cIndex": 2, "title": "Reels", "icon": "search"},
-      {"cIndex": 3, "title": "Shop", "icon": "heart"},
-      {"cIndex": 4, "title": "Profile", "icon": "profile"}
+      {"cIndex": 0, "title": "Home", "icon": "corona"},
+      {"cIndex": 1, "title": "Search", "icon": "patient"}
     ];
-    List<Widget> pages = [
-      HomeViewPage(),
-      DailyViewScreen(),
-      HomeViewPage(),
-      HomeViewPage(),
-      HomeViewPage(),
-    ];
+    List<Widget> pages = [HomeViewPage(), DailyViewScreen()];
     return Scaffold(
       appBar: AppBar(
-        title: Text("CoronApp+"),
+        title: StyledText(
+          text: "CoronApp+",
+          fontSize: 26,
+          fontWeight: FontWeight.w900,
+        ),
         centerTitle: false,
         brightness: Brightness.dark,
         backgroundColor: Colors.purple,
+        actions: [
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 7),
+                  child: Center(
+                    child: SvgPicture.asset(
+                      'assets/svg/Turkey.svg',
+                      height: 30.0,
+                      width: 30.0,
+                    ),
+                  ),
+                ),
+                StyledText(
+                  text: "Turkey",
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                )
+              ],
+            ),
+          ),
+        ],
       ),
       body: Container(
         child: pages[widget.currentIndex],
@@ -54,7 +76,7 @@ class _PageControllerViewState extends State<PageControllerView> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: 30),
               height: 50,
               child: ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
@@ -73,15 +95,14 @@ class _PageControllerViewState extends State<PageControllerView> {
                         });
                       },
                       child: Container(
-                        width: MediaQuery.of(context).size.width / 5.3,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        width: MediaQuery.of(context).size.width / 1.4,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SvgPicture.asset(
                               'assets/svg/${bottomBarList[index]["icon"]}.svg',
-                              height: 25.0,
-                              width: 25.0,
-                              color: Colors.white,
+                              height: 55.0,
+                              width: 55.0,
                             ),
                           ],
                         ),

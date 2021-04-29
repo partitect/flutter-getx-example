@@ -3,16 +3,16 @@ import 'package:get/get.dart';
 import 'package:getx_started/controllers/api_controller.dart';
 import 'package:getx_started/views/pages/home/widget/numbers_card_widget.dart';
 
-class TotalPatientsWidget extends StatefulWidget {
+class ActiveCaseWidget extends StatefulWidget {
   @override
-  _TotalPatientsWidgetState createState() => _TotalPatientsWidgetState();
+  _ActiveCaseWidgetState createState() => _ActiveCaseWidgetState();
 }
 
-class _TotalPatientsWidgetState extends State<TotalPatientsWidget> {
+class _ActiveCaseWidgetState extends State<ActiveCaseWidget> {
   final ApiController apiController = Get.find();
   @override
   void initState() {
-    apiController.getTotalPatients();
+    apiController.getActiveCase();
     super.initState();
   }
 
@@ -21,12 +21,11 @@ class _TotalPatientsWidgetState extends State<TotalPatientsWidget> {
     return GetBuilder<ApiController>(
       builder: (value) {
         return CardWidget(
-          text: "Toplam Vaka",
-          dataval: value,
-          loading: GetTotalEnum.Loading,
-          dataType: value.totalPatients,
-          icon: "patient",
-        );
+            text: "Aktif Vaka",
+            dataval: value,
+            loading: GetTotalEnum.Loading,
+            dataType: value.totalActiveCase,
+            icon: "corona");
       },
     );
   }

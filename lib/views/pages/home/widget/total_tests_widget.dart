@@ -21,11 +21,11 @@ class _TotalTestsWidgetState extends State<TotalTestsWidget> {
     return GetBuilder<ApiController>(
       builder: (value) {
         return CardWidget(
-          text: "Toplam Test",
-          dataval: value,
-          loading: GetTotalEnum.Loading,
-          dataType: value.totalTests,
-        );
+            text: "Toplam Test",
+            dataval: value,
+            loading: GetTotalEnum.Loading,
+            dataType: value.totalTests,
+            icon: "test");
       },
     );
   }
