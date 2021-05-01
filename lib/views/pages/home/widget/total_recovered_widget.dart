@@ -9,10 +9,8 @@ class TotalRecoveredWidget extends StatefulWidget {
 }
 
 class _TotalRecoveredWidgetState extends State<TotalRecoveredWidget> {
-  final ApiController apiController = Get.find();
   @override
   void initState() {
-    apiController.getTotalRecovered();
     super.initState();
   }
 
@@ -21,11 +19,11 @@ class _TotalRecoveredWidgetState extends State<TotalRecoveredWidget> {
     return GetBuilder<ApiController>(
       builder: (value) {
         return CardWidget(
-          text: "Toplam İyileşen",
+          text: 'Toplam İyileşen',
           dataval: value,
           loading: GetTotalEnum.Loading,
           dataType: value.totalRecovered,
-          icon: "recovered",
+          icon: 'recovered',
         );
       },
     );

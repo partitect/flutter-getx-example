@@ -64,12 +64,12 @@ class _CardWidgetState extends State<CardWidget> {
                   text: widget.text,
                   fontSize: 40,
                   color: Colors.yellowAccent,
-                  fontFamily: "Righteous",
+                  fontFamily: 'Righteous',
                 ),
                 Center(
                   child: StyledText(
                     text: widget.dataval.getTotalEnum == widget.loading
-                        ? "Yükleniyor"
+                        ? 'Yükleniyor'
                         : widget.dataType.toString(),
                     fontSize: 50,
                     color: Colors.white,

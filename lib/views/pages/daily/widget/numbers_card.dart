@@ -21,13 +21,13 @@ class _DailyNumbersCardWidgetState extends State<DailyNumbersCardWidget> {
           text: widget.titleText,
           fontSize: 24,
           color: Colors.yellowAccent,
-          fontFamily: "Sarabun",
+          fontFamily: 'Sarabun',
         ),
         StyledText(
           text: widget.dataText,
           fontSize: 24,
           color: Colors.yellowAccent,
-          fontFamily: "Sarabun",
+          fontFamily: 'Sarabun',
         ),
       ],
     );

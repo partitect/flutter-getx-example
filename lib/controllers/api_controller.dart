@@ -11,7 +11,7 @@ enum GetCovidEnum { Loaded, Loading, Error, Initial }
 enum GetTotalEnum { Loaded, Loading, Error, Initial }
 
 class ApiController extends GetxController {
-  ApiServices _apiServices = ApiServices();
+  final ApiServices _apiServices = ApiServices();
   GetPostEnum getPostEnum = GetPostEnum.Initial;
   GetCovidEnum getCovidEnum = GetCovidEnum.Initial;
   GetTotalEnum getTotalEnum = GetTotalEnum.Initial;
@@ -23,6 +23,7 @@ class ApiController extends GetxController {
   var totalTests;
   var totalRecovered;
   var totalActiveCase;
+  // ignore: missing_return
   Future getAllCovidStats() {
     getCovidEnum = GetCovidEnum.Loading;
     covidList.clear();
@@ -34,10 +35,10 @@ class ApiController extends GetxController {
         //üstte iki tarih arası verileri getirmesi için tarihleri verdim, altta da iki tarihin arasındaki tüm tarihleri getiren getDaysinBetween fonksiyonu ile o tarihler arasında apiyi döndürdüm
         getDaysInBeteween(date1, date2).then((dateVal) {
           for (var dts in dateVal) {
-            var data = value[Jiffy(dts).format("dd/MM/yyyy")];
+            var data = value[Jiffy(dts).format('dd/MM/yyyy')];
             //allta apinin başlarında tarih olması sebebiyle dynamic list oluşturdum, senin hata aldığın yer burası
 
-            List<dynamic> list = [];
+            var list = <dynamic>[];
             list.add(data);
             //add ile tarihli object leri listeme ekledim
 
@@ -46,6 +47,11 @@ class ApiController extends GetxController {
               //
               covidList.add(CovidStats.fromJson(stat));
             }
+            covidList.sort((a, b) {
+              var adate = a.date;
+              var bdate = b.date;
+              return adate.compareTo(bdate);
+            });
           }
         });
 
@@ -58,6 +64,7 @@ class ApiController extends GetxController {
     });
   }
 
+  // ignore: missing_return
   Future getTotalPatients() {
     getTotalEnum = GetTotalEnum.Loading;
     covidList.clear();
@@ -69,8 +76,8 @@ class ApiController extends GetxController {
 
         getDaysInBeteween(date1, date2).then((dateVal) {
           for (var dts in dateVal) {
-            var data = value[Jiffy(dts).format("dd/MM/yyyy")];
-            List<dynamic> list = [];
+            var data = value[Jiffy(dts).format('dd/MM/yyyy')];
+            var list = <dynamic>[];
             list.add(data);
             for (var stat in list) {
               if (CovidStats.fromJson(stat).cases != null) {
@@ -88,6 +95,7 @@ class ApiController extends GetxController {
     });
   }
 
+  // ignore: missing_return
   Future getTotalDeaths() {
     getTotalEnum = GetTotalEnum.Loading;
     covidList.clear();
@@ -99,8 +107,8 @@ class ApiController extends GetxController {
 
         getDaysInBeteween(date1, date2).then((dateVal) {
           for (var dts in dateVal) {
-            var data = value[Jiffy(dts).format("dd/MM/yyyy")];
-            List<dynamic> list = [];
+            var data = value[Jiffy(dts).format('dd/MM/yyyy')];
+            var list = <dynamic>[];
             list.add(data);
             for (var stat in list) {
               if (CovidStats.fromJson(stat).cases != null) {
@@ -118,6 +126,7 @@ class ApiController extends GetxController {
     });
   }
 
+  // ignore: missing_return
   Future getTotalTests() {
     getTotalEnum = GetTotalEnum.Loading;
     covidList.clear();
@@ -129,8 +138,8 @@ class ApiController extends GetxController {
 
         getDaysInBeteween(date1, date2).then((dateVal) {
           for (var dts in dateVal) {
-            var data = value[Jiffy(dts).format("dd/MM/yyyy")];
-            List<dynamic> list = [];
+            var data = value[Jiffy(dts).format('dd/MM/yyyy')];
+            var list = <dynamic>[];
             list.add(data);
             for (var stat in list) {
               if (CovidStats.fromJson(stat).cases != null) {
@@ -148,6 +157,7 @@ class ApiController extends GetxController {
     });
   }
 
+  // ignore: missing_return
   Future getTotalRecovered() {
     getTotalEnum = GetTotalEnum.Loading;
     covidList.clear();
@@ -159,8 +169,8 @@ class ApiController extends GetxController {
 
         getDaysInBeteween(date1, date2).then((dateVal) {
           for (var dts in dateVal) {
-            var data = value[Jiffy(dts).format("dd/MM/yyyy")];
-            List<dynamic> list = [];
+            var data = value[Jiffy(dts).format('dd/MM/yyyy')];
+            var list = <dynamic>[];
             list.add(data);
             for (var stat in list) {
               if (CovidStats.fromJson(stat).cases != null) {
@@ -178,6 +188,7 @@ class ApiController extends GetxController {
     });
   }
 
+  // ignore: missing_return
   Future getActiveCase() {
     getTotalEnum = GetTotalEnum.Loading;
     covidList.clear();
@@ -189,8 +200,8 @@ class ApiController extends GetxController {
 
         getDaysInBeteween(date1, date2).then((dateVal) {
           for (var dts in dateVal) {
-            var data = value[Jiffy(dts).format("dd/MM/yyyy")];
-            List<dynamic> list = [];
+            var data = value[Jiffy(dts).format('dd/MM/yyyy')];
+            var list = <dynamic>[];
             list.add(data);
             for (var stat in list) {
               if (CovidStats.fromJson(stat).cases != null) {
@@ -210,6 +221,7 @@ class ApiController extends GetxController {
     });
   }
 
+  // ignore: missing_return
   Future getAllPosts() {
     getPostEnum = GetPostEnum.Loading;
     myList.clear();

@@ -9,11 +9,8 @@ class DailyListWidget extends StatefulWidget {
 }
 
 class _DailyListWidgetState extends State<DailyListWidget> {
-  final ApiController apiController = Get.find();
-
   @override
   void initState() {
-    apiController.getAllCovidStats();
     super.initState();
   }
 
@@ -22,10 +19,13 @@ class _DailyListWidgetState extends State<DailyListWidget> {
     return GetBuilder<ApiController>(
       builder: (value) {
         return RefreshIndicator(
+          onRefresh: () async {
+            await value.getAllCovidStats();
+          },
           child: value.getCovidEnum == GetCovidEnum.Loading
-              ? Center(child: Text("Loading"))
+              ? Center(child: Text('Loading'))
               : value.getCovidEnum == GetCovidEnum.Error
-                  ? Text("Error")
+                  ? Text('Error')
                   : ListView.separated(
                       itemBuilder: (context, index) {
                         return Container(
@@ -36,7 +36,7 @@ class _DailyListWidgetState extends State<DailyListWidget> {
                               DailyCard(
                                 date: value.covidList[index].date,
                                 dailyDeaths:
-                                    value.covidList[index].deaths ?? "Ölüm Yok",
+                                    value.covidList[index].deaths ?? 'Ölüm Yok',
                                 dailyTests: value.covidList[index].tests,
                                 dailyPatients: value.covidList[index].patients,
                                 dailyRecovered:
@@ -53,9 +53,6 @@ class _DailyListWidgetState extends State<DailyListWidget> {
                       },
                       itemCount: value.covidList.length,
                     ),
-          onRefresh: () async {
-            value.getAllCovidStats();
-          },
         );
       },
     );

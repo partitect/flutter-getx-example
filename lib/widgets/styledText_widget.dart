@@ -21,7 +21,7 @@ class StyledText extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.getFont(
-        fontFamily ?? "Quicksand",
+        fontFamily ?? 'Quicksand',
         color: color,
         fontSize: fontSize,
         fontWeight: fontWeight,

@@ -9,10 +9,8 @@ class TotalDeathWidget extends StatefulWidget {
 }
 
 class _TotalDeathWidgetState extends State<TotalDeathWidget> {
-  final ApiController apiController = Get.find();
   @override
   void initState() {
-    apiController.getTotalDeaths();
     super.initState();
   }
 
@@ -21,11 +19,11 @@ class _TotalDeathWidgetState extends State<TotalDeathWidget> {
     return GetBuilder<ApiController>(
       builder: (value) {
         return CardWidget(
-          text: "Toplam Ölüm",
+          text: 'Toplam Ölüm',
           dataval: value,
           dataType: value.totalDeaths,
           loading: GetTotalEnum.Loading,
-          icon: "death",
+          icon: 'death',
         );
       },
     );

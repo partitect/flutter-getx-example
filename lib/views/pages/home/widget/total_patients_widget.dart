@@ -9,10 +9,8 @@ class TotalPatientsWidget extends StatefulWidget {
 }
 
 class _TotalPatientsWidgetState extends State<TotalPatientsWidget> {
-  final ApiController apiController = Get.find();
   @override
   void initState() {
-    apiController.getTotalPatients();
     super.initState();
   }
 
@@ -21,11 +19,11 @@ class _TotalPatientsWidgetState extends State<TotalPatientsWidget> {
     return GetBuilder<ApiController>(
       builder: (value) {
         return CardWidget(
-          text: "Toplam Vaka",
+          text: 'Toplam Vaka',
           dataval: value,
           loading: GetTotalEnum.Loading,
           dataType: value.totalPatients,
-          icon: "patient",
+          icon: 'patient',
         );
       },
     );

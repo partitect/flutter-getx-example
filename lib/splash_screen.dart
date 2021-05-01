@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:getx_started/widgets/styledText_widget.dart';
+import 'controllers/api_controller.dart';
 import 'utils/utils.dart';
 import 'controllers/page_controller.dart';
 
@@ -10,16 +12,21 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final ApiController apiController = Get.find();
   @override
   void initState() {
+    //apiController.getActiveCase().whenComplete(() => null);//fonksion tamamlandığında
+    apiController.getActiveCase();
+    apiController.getTotalDeaths();
+    apiController.getTotalPatients();
+    apiController.getTotalRecovered();
+    apiController.getTotalTests();
+    apiController.getAllCovidStats();
+
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(
-        builder: (context) {
-          return PageControllerView(
+      Get.off(() => PageControllerView(
             currentIndex: 0,
-          );
-        },
-      ));
+          ));
     });
     super.initState();
   }
@@ -46,11 +53,11 @@ class _SplashScreenState extends State<SplashScreen> {
             top: 100,
             child: Container(
               child: StyledText(
-                text: "CoronApp+",
+                text: 'CoronApp+',
                 color: Colors.redAccent,
                 fontSize: 50,
                 fontWeight: FontWeight.w900,
-                fontFamily: "Coda Caption",
+                fontFamily: 'Coda Caption',
               ),
             ),
           ),

@@ -51,26 +51,26 @@ class _DailyCardState extends State<DailyCard> {
             text: widget.date,
             fontSize: 24,
             color: Colors.yellowAccent,
-            fontFamily: "Spartan",
+            fontFamily: 'Spartan',
           ),
           DailyNumbersCardWidget(
-            titleText: "Test Sayısı:",
+            titleText: 'Test Sayısı:',
             dataText: widget.dailyTests,
           ),
           DailyNumbersCardWidget(
-            titleText: "Vaka Sayısı:",
+            titleText: 'Vaka Sayısı:',
             dataText: widget.dailyPatients,
           ),
           DailyNumbersCardWidget(
-            titleText: "Toplam Vaka Sayısı:",
+            titleText: 'Toplam Vaka Sayısı:',
             dataText: widget.totalPatient,
           ),
           DailyNumbersCardWidget(
-            titleText: "İyileşen Sayısı:",
+            titleText: 'İyileşen Sayısı:',
             dataText: widget.dailyRecovered,
           ),
           DailyNumbersCardWidget(
-            titleText: "Ölüm Sayısı:",
+            titleText: 'Ölüm Sayısı:',
             dataText: widget.dailyDeaths,
           ),
         ],

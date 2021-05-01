@@ -9,10 +9,8 @@ class ActiveCaseWidget extends StatefulWidget {
 }
 
 class _ActiveCaseWidgetState extends State<ActiveCaseWidget> {
-  final ApiController apiController = Get.find();
   @override
   void initState() {
-    apiController.getActiveCase();
     super.initState();
   }
 
@@ -21,11 +19,11 @@ class _ActiveCaseWidgetState extends State<ActiveCaseWidget> {
     return GetBuilder<ApiController>(
       builder: (value) {
         return CardWidget(
-            text: "Aktif Vaka",
+            text: 'Aktif Vaka',
             dataval: value,
             loading: GetTotalEnum.Loading,
             dataType: value.totalActiveCase,
-            icon: "corona");
+            icon: 'corona');
       },
     );
   }

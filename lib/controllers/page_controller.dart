@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:getx_started/utils/hexColor.dart';
 import 'package:getx_started/views/pages/daily/view/daily_view.dart';
 import 'package:getx_started/views/pages/home/view/home_view.dart';
 import 'package:getx_started/widgets/styledText_widget.dart';
 
+// ignore: must_be_immutable
 class PageControllerView extends StatefulWidget {
   var currentIndex;
   PageControllerView({@required this.currentIndex});
@@ -16,14 +16,14 @@ class _PageControllerViewState extends State<PageControllerView> {
   @override
   Widget build(BuildContext context) {
     var bottomBarList = [
-      {"cIndex": 0, "title": "Home", "icon": "corona"},
-      {"cIndex": 1, "title": "Search", "icon": "patient"}
+      {'cIndex': 0, 'title': 'Home', 'icon': 'corona'},
+      {'cIndex': 1, 'title': 'Search', 'icon': 'patient'}
     ];
-    List<Widget> pages = [HomeViewPage(), DailyViewScreen()];
+    var pages = <Widget>[HomeViewPage(), DailyViewScreen()];
     return Scaffold(
       appBar: AppBar(
         title: StyledText(
-          text: "CoronApp+",
+          text: 'CoronApp+',
           fontSize: 26,
           fontWeight: FontWeight.w900,
         ),
@@ -48,7 +48,7 @@ class _PageControllerViewState extends State<PageControllerView> {
                   ),
                 ),
                 StyledText(
-                  text: "Turkey",
+                  text: 'Turkey',
                   fontSize: 20,
                   fontWeight: FontWeight.w900,
                 )
@@ -91,7 +91,7 @@ class _PageControllerViewState extends State<PageControllerView> {
                     child: InkWell(
                       onTap: () {
                         setState(() {
-                          widget.currentIndex = bottomBarList[index]["cIndex"];
+                          widget.currentIndex = bottomBarList[index]['cIndex'];
                         });
                       },
                       child: Container(
